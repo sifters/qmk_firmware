@@ -34,10 +34,10 @@ enum tapdance_types{
 };
 
 enum custom_tapdances{
-  TD_Y_NUMPAD = 0,
+  TD_LCTRL_NUMPAD = 0,
 };
 
-#define T_Y    TD(TD_Y_NUMPAD)     // Tap for Y, double tap for NUMPAD
+#define T_LCTRL    TD(TD_LCTRL_NUMPAD)     // Tap for Y, double tap for NUMPAD
 
 #define KC_TASK LCTL(LSFT(KC_ESC))
 #define KC_DTTO LCTL(KC_GRAVE)
@@ -64,16 +64,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QWERTY] = LAYOUT( \
   KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  \
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     T_Y,     KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,   \
-  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,  \
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,   \
+  T_LCTRL,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,  \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT_BSLS,  \
                         KC_LALT, KC_LGUI, MO(_LOWER), TL_LWR,  TL_RSE,   MO(_RAISE), KC_BSPC, KC_DEL \
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * | DTTO |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
+ * | DTTO |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    | PGUP | Home |  Up  | End  |      |      |
+ * |      |      |      |      |      |      |                    | PGUP | Home |  Up  | End  |      | DEL  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------| PGDN | Left | Down | Right|      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -84,8 +84,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT( \
-  KC_DTTO,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                   KC_F7,     KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
-  _______, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, _______, \
+  KC_DTTO,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_BSPC, \
+  _______, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, KC_DEL,  \
   _______, _______, _______, _______, _______, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______,  _______, _______, _______\
@@ -135,11 +135,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 /* NUMPAD
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |  /   |   *  |  -   |      |
+ * | ESC  |      |      |      |      |      |                    |      |      |  /   |   *  |  -   | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |  P7  |  P8  |  P9  |  +   |      |
+ * | TAB  |      |      |      |      |      |                    |      |  P7  |  P8  |  P9  |  +   |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |  P4  |  P5  |  P6  |  .   |
+ * | LCTRL|      |      |      |      |      |-------.    ,-------|      |  P4  |  P5  |  P6  |  .   |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |  P1  |  P2  |  P3  |  =   |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -148,11 +148,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
   [_NUMPAD] = LAYOUT( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   T_Y,     KC_P7,   KC_P8,   KC_P9,   KC_PPLS, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, XXXXXXX, \
-                             _______, _______, _______, _______, _______,  KC_P0,   KC_PDOT, _______ \
+  KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, KC_PSLS, KC_PAST, KC_PMNS, KC_BSPC, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, XXXXXXX, \
+  T_LCTRL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, XXXXXXX, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, XXXXXXX, \
+                             _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, _______ \
   )
 };
 
@@ -259,19 +259,19 @@ int cur_dance (qk_tap_dance_state_t *state) {
 }
 
 // BEGIN: Y, NUMPAD
-static tap y_numpad_tap_state = {
+static tap lctrl_numpad_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void y_numpad_finished (qk_tap_dance_state_t *state, void *user_data) {
-  y_numpad_tap_state.state = cur_dance(state);
-  switch (y_numpad_tap_state.state) {
+void lctrl_numpad_finished (qk_tap_dance_state_t *state, void *user_data) {
+  lctrl_numpad_tap_state.state = cur_dance(state);
+  switch (lctrl_numpad_tap_state.state) {
     case SINGLE_TAP: 
-      tap_code(KC_Y); 
+      tap_code(KC_LCTRL); 
       break;
     case SINGLE_HOLD: 
-      register_code16(KC_Y);
+      register_code16(KC_LCTRL);
       break;
     case DOUBLE_TAP: 
       if (layer_state_is(_NUMPAD)) {
@@ -283,16 +283,16 @@ void y_numpad_finished (qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void y_numpad_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (y_numpad_tap_state.state) {
+void lctrl_numpad_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (lctrl_numpad_tap_state.state) {
     case SINGLE_HOLD:
-      unregister_code16(KC_Y); 
+      unregister_code16(KC_LCTRL); 
       break;
   }
-  y_numpad_tap_state.state = 0;
+  lctrl_numpad_tap_state.state = 0;
 }
 // END: Y, NUMPAD
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_Y_NUMPAD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, y_numpad_finished, y_numpad_reset, 300),
+  [TD_LCTRL_NUMPAD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lctrl_numpad_finished, lctrl_numpad_reset, 300),
 };
