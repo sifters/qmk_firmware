@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |      |      |      |      |      |                    |      |      |  /   |   *  |  -   | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |      |      |      |      |      |                    |      |  P7  |  P8  |  P9  |  +   |      |
+ * | TAB  |      |      |      |      |      |                    |      |  P7  |  P8  |  P9  |  +   | DEL  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | LCTRL|      |      |      |      |      |-------.    ,-------|      |  P4  |  P5  |  P6  |  .   |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -149,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_NUMPAD] = LAYOUT( \
   KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, KC_PSLS, KC_PAST, KC_PMNS, KC_BSPC, \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, XXXXXXX, \
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_DEL,  \
   T_LCTRL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, XXXXXXX, \
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, XXXXXXX, \
                              _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, _______ \
