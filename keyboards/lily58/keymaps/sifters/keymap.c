@@ -259,40 +259,41 @@ int cur_dance (qk_tap_dance_state_t *state) {
 }
 
 // BEGIN: Y, NUMPAD
-static tap lctrl_numpad_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void lctrl_numpad_finished (qk_tap_dance_state_t *state, void *user_data) {
-  lctrl_numpad_tap_state.state = cur_dance(state);
-  switch (lctrl_numpad_tap_state.state) {
-    case SINGLE_TAP: 
-      tap_code(KC_LCTRL); 
-      break;
-    case SINGLE_HOLD: 
-      register_code16(KC_LCTRL);
-      break;
-    case DOUBLE_TAP: 
-      if (layer_state_is(_NUMPAD)) {
-        layer_off(_NUMPAD);
-      } else { 
-        layer_on(_NUMPAD);
-      }
-      break;
-  }
-}
-
-void lctrl_numpad_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (lctrl_numpad_tap_state.state) {
-    case SINGLE_HOLD:
-      unregister_code16(KC_LCTRL); 
-      break;
-  }
-  lctrl_numpad_tap_state.state = 0;
-}
+// static tap lctrl_numpad_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+// 
+// void lctrl_numpad_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   lctrl_numpad_tap_state.state = cur_dance(state);
+//   switch (lctrl_numpad_tap_state.state) {
+//     case SINGLE_TAP: 
+//       tap_code(KC_LCTRL); 
+//       break;
+//     case SINGLE_HOLD: 
+//       register_code16(KC_LCTRL);
+//       break;
+//     case DOUBLE_TAP: 
+//       if (layer_state_is(_NUMPAD)) {
+//         layer_off(_NUMPAD);
+//       } else { 
+//         layer_on(_NUMPAD);
+//       }
+//       break;
+//   }
+// }
+// 
+// void lctrl_numpad_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (lctrl_numpad_tap_state.state) {
+//     case SINGLE_HOLD:
+//       unregister_code16(KC_LCTRL); 
+//       break;
+//   }
+//   lctrl_numpad_tap_state.state = 0;
+// }
 // END: Y, NUMPAD
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_LCTRL_NUMPAD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lctrl_numpad_finished, lctrl_numpad_reset, 300),
+//  [TD_LCTRL_NUMPAD] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lctrl_numpad_finished, lctrl_numpad_reset, 300),
+    [TD_LCTRL_NUMPAD] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LCTRL, _NUMPAD),
 };
