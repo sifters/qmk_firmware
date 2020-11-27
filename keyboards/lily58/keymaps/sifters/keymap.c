@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
   _______, _______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, KC_PSCR, \
   _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, \
-  _______, _______, KC_WBAK, KC_WTSP, KC_WFWD, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, KC_WBAK, KC_WSTP, KC_WFWD, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______,  _______, _______, _______\
 ),
 /* ADJUST
@@ -129,8 +129,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, RGB_TOG, RGB_HUI, RGB_SUI, RGB_VAI, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, XXXXXXX, RGB_MOD, RGB_HUD, RGB_SUD, RGB_VAD,\
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, XXXXXXX, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,\
                              _______, _______, _______, _______, _______,  _______, _______, _______ \
   ),
 /* NUMPAD
