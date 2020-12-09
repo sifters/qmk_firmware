@@ -39,11 +39,12 @@ enum custom_tapdances{
 
 #define T_LCTRL    TD(TD_LCTRL_NUMPAD)     // Tap for Y, double tap for NUMPAD
 
-#define KC_TASK LCTL(LSFT(KC_ESC))
-#define KC_DTTO LCTL(KC_GRAVE)
-#define TL_LWR LT(_LOWER, KC_SPC)
-#define TL_RSE LT(_RAISE, KC_SPC)
-#define MT_BSLS MT(MOD_RSFT, KC_BSLS) 
+#define KC_TASK     LCTL(LSFT(KC_ESC))
+#define KC_DTTO     LCTL(KC_GRAVE)
+#define KC_ATAB     LALT(KC_TAB)
+#define TL_LWR      LT(_LOWER, KC_SPC)
+#define TL_RSE      LT(_RAISE, KC_SPC)
+#define MT_BSLS     MT(MOD_RSFT, KC_BSLS) 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -73,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | DTTO |      |      |      |      |      |                    |      |      |      |      |      | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    | PGUP | Home |  Up  | End  |      | DEL  |
+ * | ATAB |      |      |      |      |      |                    | PGUP | Home |  Up  | End  |      | DEL  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------| PGDN | Left | Down | Right|      | Enter|
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -85,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT( \
   KC_DTTO, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
-  _______, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, KC_DEL,  \
+  KC_ATAB, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, KC_DEL,  \
   _______, _______, _______, _______, _______, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_ENT,  \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______,  _______, _______, _______\
