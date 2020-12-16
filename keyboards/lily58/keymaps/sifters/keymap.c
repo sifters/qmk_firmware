@@ -23,21 +23,14 @@ typedef struct {
   int state;
 } tap;
 
-enum tapdance_types{
-  SINGLE_TAP = 1,
-  SINGLE_HOLD = 2,
-  DOUBLE_TAP = 3,
-  DOUBLE_HOLD = 4,
-  DOUBLE_SINGLE_TAP = 5, //send two single taps
-  TRIPLE_TAP = 6,
-  TRIPLE_HOLD = 7
-};
 
 enum custom_tapdances{
   TD_LCTRL_NUMPAD = 0,
+  TD_CAPS_LOCK,
 };
 
-#define T_LCTRL    TD(TD_LCTRL_NUMPAD)     // Tap for Y, double tap for NUMPAD
+#define T_LCTRL     TD(TD_LCTRL_NUMPAD)     // Tap/hold for CTL, double tap for NUMPAD
+#define T_LSFT		TD(TD_CAPS_LOCK)		// Tap/Hold for Left Shift, Triple Tap for Capslock
 
 #define KC_TASK     LCTL(LSFT(KC_ESC))
 #define KC_DTTO     LCTL(KC_GRAVE)
@@ -67,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  \
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,   \
   T_LCTRL,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,  \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT_BSLS,  \
+  KC_LSFT,   KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT_BSLS,  \
                         KC_LALT, KC_LGUI, MO(_LOWER), TL_LWR,  TL_RSE,   KC_ENT, KC_BSPC, KC_DEL \
 ),
 /* LOWER
@@ -120,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |                    |      |      |      | MPRV | MNXT | VOL- |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------| BRIU |      |      |      |      | MUTE |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |------+------+------+------+------+------| Power |    | Sleep |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------| BRID |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Space \  |Enter |BackSP| RGUI |
@@ -131,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  KC_SLEP, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                              _______, _______, _______, _______, _______,  _______, _______, _______ \
   ),
 /* NUMPAD
@@ -207,8 +200,13 @@ void oled_task_user(void) {
         default:
             oled_write_P(PSTR("Undefined\n"), false);
     }       
+    led_t led_state = host_keyboard_led_state();
+    oled_write_P(led_state.num_lock ?       PSTR("NUM ")   : PSTR("    "), false);
+    oled_write_P(led_state.caps_lock ?      PSTR("CAP ")   : PSTR("    "), false);
+    oled_write_P(led_state.scroll_lock ?    PSTR("SCR \n") : PSTR("    \n"), false);
     oled_write_ln(read_keylog(), false);
     oled_write_ln(read_keylogs(), false);
+
     //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
     //oled_write_ln(read_host_led_state(), false);
     //oled_write_ln(read_timelog(), false);
@@ -228,33 +226,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-// Begin Tap Dances
-int cur_dance (qk_tap_dance_state_t *state) {
-   if (state->count == 1) {
-    if (state->interrupted || !state->pressed)  return SINGLE_TAP;
-    //key has not been interrupted, but they key is still held. Means you want to send a 'HOLD'.
-    else return SINGLE_HOLD;
-  }
-  else if (state->count == 2) {
-    /*
-     * DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
-     * action when hitting 'pp'. Suggested use case for this return value is when you want to send two
-     * keystrokes of the key, and not the 'double tap' action/macro.
-    */
-    if (state->interrupted) return DOUBLE_SINGLE_TAP;
-    else if (state->pressed) return DOUBLE_HOLD;
-    else return DOUBLE_TAP;
-  }
-  //Assumes no one is trying to type the same letter three times (at least not quickly).
-  //If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
-  //an exception here to return a 'TRIPLE_SINGLE_TAP', and define that enum just like 'DOUBLE_SINGLE_TAP'
-  if (state->count == 3) {
-    if (state->interrupted || !state->pressed)  return TRIPLE_TAP;
-    else return TRIPLE_HOLD;
-  }
-  else return 8; //magic number. At some point this method will expand to work for more presses
+
+void dance_capslock(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 3) {
+		tap_code(KC_CAPS);
+        reset_tap_dance(state);
+    } else {
+        tap_code(KC_LSFT);
+        reset_tap_dance(state);
+    }
 }
+
+
+// All tap dance functions would go here.
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LCTRL_NUMPAD] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LCTRL, _NUMPAD),
+    [TD_CAPS_LOCK] = ACTION_TAP_DANCE_FN(dance_capslock),
 };
