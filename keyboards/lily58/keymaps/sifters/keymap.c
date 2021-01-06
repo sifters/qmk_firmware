@@ -41,6 +41,7 @@ enum custom_tapdances{
 #define TL_RSE      LT(_RAISE, KC_SPC)
 #define MT_BSLS     MT(MOD_RSFT, KC_BSLS) 
 
+#define BL_QWER     DF(_QWERTY)
 #define BL_GAME     DF(_GAME)
 #define BL_CLMK     DF(_COLEMAK)
 
@@ -120,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------| PGDN | Left | Down | Right|      | Enter|
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * | CAPS |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Space \  |Enter |BackSP| DEL  |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -130,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_DTTO, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
   KC_ATAB, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, KC_DEL,  \
   _______, _______, _______, _______, _______, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_ENT,  \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______, _______, _______, _______\
 ),
 /* RAISE
@@ -157,11 +158,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * | GAME |      |      |      |      |      |                    | MAIL | CALC |      | MSEL | MPLY | VOL+ |
+ * |QWERTY|      |      |      |      |      |                    | MAIL | CALC |      | MSEL | MPLY | VOL+ |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |COLEMK|      |      |      |      |      |                    |      |      |      | MPRV | MNXT | VOL- |
+ * | GAME |      |      |      |      |      |                    |      |      |      | MPRV | MNXT | VOL- |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| BRIU |      |      |      |      | MUTE |
+ * |COLEMK|      |      |      |      |      |-------.    ,-------| BRIU |      |      |      |      | MUTE |
  * |------+------+------+------+------+------| Power |    | Sleep |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------| BRID |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -170,9 +171,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
   [_ADJUST] = LAYOUT( \
-  BL_GAME, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_MAIL, KC_CALC, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
-  BL_CLMK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
+  BL_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_MAIL, KC_CALC, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
+  BL_GAME, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
+  BL_CLMK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  KC_SLEP, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                              _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
@@ -256,10 +257,10 @@ void oled_task_user(void) {
             oled_write_P(PSTR("Undefined\n"), false);
     }       
     led_t led_state = host_keyboard_led_state();
-    oled_write_P(led_state.num_lock ?       PSTR("NUM ")   : PSTR("    "), false);
-    oled_write_P(led_state.caps_lock ?      PSTR("CAP ")   : PSTR("    "), false);
-    oled_write_P(led_state.scroll_lock ?    PSTR("SCR \n") : PSTR("    \n"), false);
-    oled_write_ln(read_keylog(), false);
+    oled_write_P(led_state.num_lock ?       PSTR("[NUM] ")   : PSTR("      "), false);
+    oled_write_P(led_state.caps_lock ?      PSTR("[CAP] ")   : PSTR("      "), false);
+    oled_write_P(led_state.scroll_lock ?    PSTR("[SCR] \n") : PSTR("      \n"), false);
+    oled_write_ln(read_keylog(), 
     oled_write_ln(read_keylogs(), false);
 
     //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
