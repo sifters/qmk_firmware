@@ -41,6 +41,9 @@ enum custom_tapdances{
 #define TL_RSE      LT(_RAISE, KC_SPC)
 #define MT_BSLS     MT(MOD_RSFT, KC_BSLS) 
 
+#define BL_GAME     DF(_GAME)
+#define BL_CLMK     DF(_COLEMAK)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* QWERTY
@@ -141,8 +144,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      | WBAK | WSTP | WFWD |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Space \  |Enter |RAISE |BackSP| DEL  |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
+ *                   |      |      |      |/       /         \      \ |      |      |      |      |
+ *                   `----------------------------'           '------''---------------------------'
  */
 
 [_RAISE] = LAYOUT( \
@@ -154,9 +157,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    | MAIL | CALC |      | MSEL | MPLY | VOL+ |
+ * | GAME |      |      |      |      |      |                    | MAIL | CALC |      | MSEL | MPLY | VOL+ |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      | MPRV | MNXT | VOL- |
+ * |COLEMK|      |      |      |      |      |                    |      |      |      | MPRV | MNXT | VOL- |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------| BRIU |      |      |      |      | MUTE |
  * |------+------+------+------+------+------| Power |    | Sleep |------+------+------+------+------+------|
@@ -167,8 +170,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
   [_ADJUST] = LAYOUT( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_MAIL, KC_CALC, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
+  BL_GAME, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_MAIL, KC_CALC, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
+  BL_CLMK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  KC_SLEP, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                              _______, _______, _______, _______, _______, _______, _______, _______ \
@@ -233,6 +236,9 @@ void oled_task_user(void) {
             break;
         case _COLEMAK:
             oled_write_P(PSTR("Colemak\n"), false);
+            break;
+        case _GAME:
+            oled_write_P(PSTR("Game\n"), false);
             break;
         case _RAISE:
             oled_write_P(PSTR("Raise\n"), false);
