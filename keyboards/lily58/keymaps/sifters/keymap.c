@@ -61,8 +61,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  \
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,   \
   T_LCTRL,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,  \
-  KC_LSFT,   KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT_BSLS,  \
-                        KC_LALT, KC_LGUI, MO(_LOWER), TL_LWR,  TL_RSE,   KC_ENT, KC_BSPC, KC_DEL \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT_BSLS,  \
+                        KC_LALT, KC_LGUI, MO(_LOWER), TL_LWR,  TL_RSE,   KC_ENT,  KC_BSPC, KC_DEL \
 ),
 /* COLEMAK
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -79,12 +79,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
 
- [_QWERTY] = LAYOUT( \
+ [_COLEMAK] = LAYOUT( \
   KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_MINS,  \
   KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_EQL,   \
   T_LCTRL,  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                     KC_H,    KC_N,    KC_E,    KC_I,    KC_O,     KC_QUOT,  \
-  KC_LSFT,   KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC, KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT_BSLS,  \
-                        KC_LALT, KC_LGUI, MO(_LOWER), TL_LWR,  TL_RSE,   KC_ENT, KC_BSPC, KC_DEL \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,  KC_LBRC, KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  MT_BSLS,  \
+                        KC_LALT, KC_LGUI, MO(_LOWER), TL_LWR,  TL_RSE,   KC_ENT, KC_BSPC,  KC_DEL \
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ATAB, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, KC_DEL,  \
   _______, _______, _______, _______, _______, _______,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_ENT,  \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-                             _______, _______, _______, _______, _______,  _______, _______, _______\
+                             _______, _______, _______, _______, _______, _______, _______, _______\
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, KC_PSCR, \
   _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, \
   _______, _______, KC_WBAK, KC_WSTP, KC_WFWD, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-                             _______, _______, _______, _______, _______,  _______, _______, _______\
+                             _______, _______, _______, _______, _______, _______, _______, _______\
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  KC_SLEP, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-                             _______, _______, _______, _______, _______,  _______, _______, _______ \
+                             _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 /* NUMPAD
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -207,6 +207,9 @@ void oled_task_user(void) {
     switch(get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write_P(PSTR("Default\n"), false);
+            break;
+        case _COLEMAK:
+            oled_write_P(PSTR("Colemak\n"), false);
             break;
         case _RAISE:
             oled_write_P(PSTR("Raise\n"), false);
