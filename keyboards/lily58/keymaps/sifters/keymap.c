@@ -35,6 +35,7 @@ enum custom_tapdances{
 #define T_LSFT		TD(TD_CAPS_LOCK)		// Tap/Hold for Left Shift, Triple Tap for Capslock
 
 #define KC_TASK     LCTL(LSFT(KC_ESC))
+#define KC_CADL     LCTL(LALT(KC_DEL))
 #define KC_DTTO     LCTL(KC_GRAVE)
 #define KC_ATAB     LALT(KC_TAB)
 #define TL_LWR      LT(_LOWER, KC_SPC)
@@ -115,11 +116,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * | DTTO |      |      |      |      |      |                    |      |      |      |      |      | BSPC |
+ * | DTTO | TASK | CADL |      |      |      |                    |      |      |      |      |      | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | ATAB |      |      |      |      |      |                    | PGUP | Home |  Up  | End  |      | DEL  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| PGDN | Left | Down | Right|      | Enter|
+ * |      |      |      |      |      |      |-------.    ,-------| PGDN | PIPE | Down | Right|      | Enter|
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * | CAPS |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -128,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT( \
-  KC_DTTO, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
+  KC_DTTO, KC_TASK, KC_CADL, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
   KC_ATAB, _______, _______, _______, _______, _______,                   KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, KC_DEL,  \
   _______, _______, _______, _______, _______, _______,                   KC_PGDN, KC_PIPE, KC_DOWN, KC_RGHT, XXXXXXX, KC_ENT,  \
   KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
