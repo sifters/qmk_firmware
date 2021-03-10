@@ -203,9 +203,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // Set ADJUST layer
-uint32_t layer_state_set_user(uint32_t state) {
-    return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
+// uint32_t layer_state_set_user(uint32_t state) {
+//    return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
+// }
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
+    switch (get_highest_layer(state)) {
+    case _NUMPAD:
+		if ( !(host_keyboard_leds() & (1<<USB_LED_NUM_LOCK))) {
+  			register_code(KC_NUMLOCK);
+    		unregister_code(KC_NUMLOCK);
+  		};
+        break;
+    default: //  for any other layers, or the default layer
+		if ( (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK))) {
+  			register_code(KC_NUMLOCK);
+    		unregister_code(KC_NUMLOCK);
+  		};
+        break;
+    }
+  return state;
 }
+
+
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
 #ifdef OLED_DRIVER_ENABLE
@@ -219,9 +240,10 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // When you add source files to SRC in rules.mk, you can use functions.
 // const char *read_layer_state(void);
 const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
+
+// void set_keylog(uint16_t keycode, keyrecord_t *record);
+// const char *read_keylog(void);
+// const char *read_keylogs(void);
 
 // const char *read_mode_icon(bool swap);
 // const char *read_host_led_state(void);
@@ -288,7 +310,6 @@ void oled_task_user(void) {
 //   }
 //   return true;
 // }
-
 
 void dance_capslock(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 3) {
