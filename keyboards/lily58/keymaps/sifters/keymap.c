@@ -267,7 +267,7 @@ void oled_task_user(void) {
     oled_write_P(led_state.num_lock ?       PSTR("NUM ")   : PSTR("    "), false);
     oled_write_P(led_state.caps_lock ?      PSTR("CAP ")   : PSTR("    "), false);
     oled_write_P(led_state.scroll_lock ?    PSTR("SCR \n") : PSTR("    \n"), false);
-    oled_write_ln(read_keylog(), false); 
+    //oled_write_ln(read_keylog(), false); 
     //oled_write_ln(read_keylogs(), false);
 
     //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
@@ -279,15 +279,15 @@ void oled_task_user(void) {
 }
 #endif // OLED_DRIVER_ENABLE
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-#ifdef OLED_DRIVER_ENABLE
-    set_keylog(keycode, record);
-#endif
-    // set_timelog();
-  }
-  return true;
-}
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//   if (record->event.pressed) {
+// #ifdef OLED_DRIVER_ENABLE
+//     set_keylog(keycode, record);
+// #endif
+//     // set_timelog();
+//   }
+//   return true;
+// }
 
 
 void dance_capslock(qk_tap_dance_state_t *state, void *user_data) {
