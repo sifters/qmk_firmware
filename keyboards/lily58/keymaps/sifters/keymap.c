@@ -202,12 +202,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-// Set ADJUST layer
-// uint32_t layer_state_set_user(uint32_t state) {
-//    return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
-// }
-
 layer_state_t layer_state_set_user(layer_state_t state) {
+// Set ADJUST layer
     state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
     switch (get_highest_layer(state)) {
     case _NUMPAD:
@@ -241,14 +237,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // const char *read_layer_state(void);
 const char *read_logo(void);
 
-// void set_keylog(uint16_t keycode, keyrecord_t *record);
-// const char *read_keylog(void);
-// const char *read_keylogs(void);
-
-// const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
-// void set_timelog(void);
-// const char *read_timelog(void);
 
 void oled_task_user(void) {
   if (is_keyboard_master()) {
@@ -289,27 +277,12 @@ void oled_task_user(void) {
     oled_write_P(led_state.num_lock ?       PSTR("NUM ")   : PSTR("    "), false);
     oled_write_P(led_state.caps_lock ?      PSTR("CAP ")   : PSTR("    "), false);
     oled_write_P(led_state.scroll_lock ?    PSTR("SCR \n") : PSTR("    \n"), false);
-    //oled_write_ln(read_keylog(), false); 
-    //oled_write_ln(read_keylogs(), false);
-
-    //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
-    //oled_write_ln(read_host_led_state(), false);
-    //oled_write_ln(read_timelog(), false);
   } else {
     oled_write(read_logo(), false);
   }
 }
 #endif // OLED_DRIVER_ENABLE
 
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//   if (record->event.pressed) {
-// #ifdef OLED_DRIVER_ENABLE
-//     set_keylog(keycode, record);
-// #endif
-//     // set_timelog();
-//   }
-//   return true;
-// }
 
 void dance_capslock(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 3) {
