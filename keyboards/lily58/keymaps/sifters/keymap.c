@@ -40,8 +40,8 @@ enum custom_tapdances{
 #define KC_ATAB     LALT(KC_TAB)
 #define TL_LWR      LT(_LOWER, KC_SPC)
 #define TL_RSE      LT(_RAISE, KC_SPC)
-#define MT_QUOT     MT(MOD_RCTL, KC_QUOT)
-#define MT_BSLS     MT(MOD_RSFT, KC_BSLS) 
+#define MT_QUOT     RCTL_T(KC_QUOT)
+#define MT_BSLS     RSFT_T(KC_BSLS) 
 
 #define BL_QWER     DF(_QWERTY)
 #define BL_GAME     DF(_GAME)
@@ -301,3 +301,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LCTRL_NUMPAD] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LCTRL, _NUMPAD),
     [TD_CAPS_LOCK] = ACTION_TAP_DANCE_FN(dance_capslock),
 };
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case RCTL_T(KC_QUOT):
+            return true;
+        default:
+            return false;
+    }
+}
