@@ -306,6 +306,8 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case RCTL_T(KC_QUOT):
             return true;
+        case RSFT_T(KC_BSLS):
+            return true;
         default:
             return false;
     }
