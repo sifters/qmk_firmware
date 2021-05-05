@@ -184,9 +184,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |      |      |      |      |      |                    |      |      |  /   |   *  |  -   | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |      |      |      |      |      |                    |      |  P7  |  P8  |  P9  |  +   | DEL  |
+ * | TAB  |      | Home |  Up  | End  |      |                    | PGUP |  P7  |  P8  |  P9  |  +   | DEL  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | LCTRL|      |      |      |      |      |-------.    ,-------|      |  P4  |  P5  |  P6  |  .   | KPENT|
+ * | LCTRL|      | Left | Down | Right|      |-------.    ,-------| PGDN |  P4  |  P5  |  P6  |  .   | KPENT|
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |  P1  |  P2  |  P3  |  =   |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -196,8 +196,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_NUMPAD] = LAYOUT( \
   KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, KC_PSLS, KC_PAST, KC_PMNS, KC_BSPC, \
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_DEL,  \
-  T_LCTRL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, KC_PENT, \
+  _______, XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX,                   KC_PGUP, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_DEL,  \
+  T_LCTRL, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                   KC_PGDN, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, KC_PENT, \
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, XXXXXXX, \
                              _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, _______ \
   )
