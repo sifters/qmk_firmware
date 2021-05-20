@@ -31,11 +31,13 @@ enum custom_tapdances{
   TD_CAPS_LOCK,
 };
 
+
 #define T_LCTRL     TD(TD_LCTRL_NUMPAD)     // Tap/hold for CTL, double tap for NUMPAD
 #define T_LSFT		TD(TD_CAPS_LOCK)		// Tap/Hold for Left Shift, Triple Tap for Capslock
 
 #define KC_TASK     LCTL(LSFT(KC_ESC))
 #define KC_CADL     LCTL(LALT(KC_DEL))
+#define KC_CAED     LCTL(LALT(KC_END))
 #define KC_DTTO     LCTL(KC_GRAVE)
 #define KC_ATAB     LALT(KC_TAB)
 #define KC_SINS     LSFT(KC_INS)
@@ -118,23 +120,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * | DTTO | TASK | CADL |      |      |      |                    |      |      |      |      |      | BSPC |
+ * | DTTO | TASK | CADL | CAEND|      |      |                    |      |      |      |      |      | BSPC |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | ATAB |      |      |      |      |      |                    |      |      |      |      |      | DEL  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------|      | PIPE |      |      |      | Enter|
  * |------+------+------+------+------+------|   (   |    |   )   |------+------+------+------+------+------|
- * | CAPS |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Space \  |Enter |BackSP| SINS |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT( \
-  KC_DTTO, KC_TASK, KC_CADL, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
+  KC_DTTO, KC_TASK, KC_CADL, KC_CAED, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC, \
   KC_ATAB, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, KC_DEL,  \
   _______, _______, _______, _______, _______, _______,                   _______, KC_PIPE, _______, _______, _______, KC_ENT,  \
-  KC_CAPS, _______, _______, _______, _______, _______, KC_LPRN, KC_RPRN, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, KC_LPRN, KC_RPRN, _______, _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______, _______, _______, KC_SINS \
 ),
 /* RAISE
@@ -167,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |COLEMK|      |      |      |      |      |-------.    ,-------| BRIU |      |      |      |      | MUTE |
  * |------+------+------+------+------+------| Power |    | Sleep |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------| BRID |      |      |      |      |      |
+ * | CAPS |      |      |      |      |      |-------|    |-------| BRID |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Space \  |Enter |BackSP| RGUI |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -177,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   BL_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_MAIL, KC_CALC, XXXXXXX, KC_MSEL, KC_MPLY, KC_VOLU, \
   BL_GAME, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_VOLD, \
   BL_CLMK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  KC_SLEP, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  KC_SLEP, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                              _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 /* NUMPAD
